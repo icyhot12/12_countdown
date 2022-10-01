@@ -1,5 +1,6 @@
 :root {
   --light-white: hsl(205, 100%, 96%);
+  --dark-blue: hsl(205, 86%, 17%);
 }
 
 html,
@@ -52,7 +53,37 @@ body {
   padding-top: 10px;
 }
 
-@media screen and (max-width: 900px) {
+.box >h4 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+}
+
+.description {
+    text-transform: uppercase;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-blue);
+    color: white;
+    width: 70px;
+    height: 70px;
+    padding: 5px 10px;
+}
+
+.deadline-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 925px) {
   .main-container {
     flex-direction: column;
     align-items: center;
