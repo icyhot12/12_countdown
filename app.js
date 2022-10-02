@@ -39,7 +39,7 @@ const giveaway = document.querySelector('.auction-title-small');
 const deadline = document.querySelector('.deadline-container');
 const items = document.querySelectorAll('.box h4');
 
-let futureDate = new Date(2022, 9, 2, 11, 16, 30);
+let futureDate = new Date(2022, 9, 2, 16, 46, 50);
 
 const year = futureDate.getFullYear();
 let month = futureDate.getMonth();
@@ -70,10 +70,19 @@ function getTimeDif() {
     let currentDate = new Date();
     let dateDif = futureDate - currentDate;
 
+    if (dateDif < 1001) {
+        clearInterval(countdown);
+        giveaway.innerHTML = "giveaway already ended :(";
+        items.forEach((item) => {
+            item.innerHTML = "00"
+        })
+    return;
+    };
+
     let remainDays = Math.floor(dateDif / oneDay);
-    let remainHours = Math.floor(dateDif / oneHour) - remainDays * 24;
-    let remainMinutes = Math.floor(dateDif / oneMinute) - remainDays * 24 * 60 - remainHours * 60;
-    let remainSeconds = Math.floor(dateDif / oneSecond) - remainDays * 24 * 60 * 60 - remainHours * 60 * 60 - remainMinutes * 60;
+    let remainHours = Math.floor((dateDif % oneDay)/oneHour);
+    let remainMinutes = Math.floor((dateDif % oneHour)/ oneMinute);
+    let remainSeconds = Math.floor((dateDif % oneMinute) / oneSecond);
 
     const values = [remainDays, remainHours, remainMinutes, remainSeconds];
 
@@ -83,9 +92,6 @@ function getTimeDif() {
         item.innerHTML = numberFormat(values[index]);
     })
 
-    if(dateDif <0) {
-        clearInterval(countdown)
-    }
 
 };
 
